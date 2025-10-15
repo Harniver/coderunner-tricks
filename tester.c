@@ -47,8 +47,9 @@ int __malloc_cnt = 0, __free_cnt = 0;       // counters of malloc and free calle
 int __student_malloc_cnt = 0;               // counter of student mallocs
 int __call_counter = 0;                     // counter of calls to student function
 int __recursion_depth = 0;                  // depth of recursion in student function
-int __try_depth = 0;                        // depth of nested try-catch of segfaults
-jmp_buf __env[16];                          // jump information to catch segfaults
+int __try_depth = 0;                        // depth of nested try-catch of errors
+int __signal = -1;                          // signal code in case of errors
+jmp_buf __env[16];                          // jump information to catch errors
 
 
 // Prints output from the student
@@ -121,26 +122,37 @@ void __check_free() {
     __free_cnt = 0;
 }
 
-// Handler ignoring segmentation faults
-void __handle_sigsegv(int signum) {
+// Sets captured signals to a given function
+void __set_signals(sig_t func) {
+    signal(SIGSEGV, func);
+    signal(SIGFPE,  func);
+}
+
+// Handler ignoring errors
+void __handle_error(int signum) {
     __try_depth--;
-    if (__try_depth == 0) signal(SIGSEGV, SIG_DFL);
+    if (__try_depth == 0) __set_signals(SIG_DFL);
     __passed = 0;
+    __signal = signum;
     longjmp(__env[__try_depth], 1);
 }
 
 // Macro protecting code from segmentation faults
-#define SAFE_EXEC_NAME(CODE, NAME)                                  \
-    if (__try_depth == 16) {                                        \
-        CODE;                                                       \
-    } else if (setjmp(__env[__try_depth]) == 0) {                   \
-        if (__try_depth == 0) signal(SIGSEGV, &__handle_sigsegv);   \
-        __try_depth++;                                              \
-        CODE;                                                       \
-        __try_depth--;                                              \
-        if (__try_depth == 0) signal(SIGSEGV, SIG_DFL);             \
-    } else                                                          \
-        printf("ERROR: segmentation fault in student_%s\n", NAME);
+#define SAFE_EXEC_NAME(CODE, NAME)                                              \
+    if (__try_depth == 16) {                                                    \
+        CODE;                                                                   \
+    } else if (setjmp(__env[__try_depth]) == 0) {                               \
+        if (__try_depth == 0) __set_signals(&__handle_error);                   \
+        __try_depth++;                                                          \
+        CODE;                                                                   \
+        __try_depth--;                                                          \
+        if (__try_depth == 0) __set_signals(SIG_DFL);                           \
+    } else {                                                                    \
+        if (__signal == SIGSEGV)                                                \
+            printf("ERROR: segmentation fault in student_%s\n", NAME);          \
+        else                                                                    \
+            printf("ERROR: floating-point exception in student_%s\n", NAME);    \
+    }
 
 // Special case for student function
 #define SAFE_EXEC(CODE) SAFE_EXEC_NAME(CODE, __function_name)
