@@ -1,11 +1,13 @@
-#define __DATA __CHAR   // The type in list and tree nodes
+#define __DATA __CHAR   // The type in list and tree nodes TO REPLACE
 
 #include "tester.h"     // Test library header and setup
 #include "list.h"       // List data type header
+// If needed, further data types may be implemented in a similar way as in those files
 
-List stringToList(char *s); // Declaration of the function to be implemented
+List stringToList(char *s); // Declaration of the function to be implemented TO REPLACE
 
 #include "sol_string.c"
+// TO REPLACE the first pattern
 //{{ STUDENT_ANSWER | replace({
 //    'List stringToList' : 'List student_stringToList', 'goto' : 'goto_disallowed',
 //    'int main' : 'int student_main', 'malloc' : 'student_malloc', 'free' : 'student_free',
@@ -14,14 +16,14 @@ List stringToList(char *s); // Declaration of the function to be implemented
 //}) }}
 
 #define SEPARATOR       "#<ab@17943918#@>#" // Coderunner separator
-#define __DEBUG         0                   // Use 1 while developing the question, then 0 when ready
-#define __FUNCTION      stringToList        // The name of the function to be developed
-typedef List (*__function_type)(char*);     // The type of the function to be developed
+#define __DEBUG         0                   // Use 1 while developing the question, then 0 when ready TO REPLACE
+#define __FUNCTION      stringToList        // The name of the function to be developed TO REPLACE
+typedef List (*__function_type)(char*);     // The type of the function to be developed TO REPLACE
 
 
 #include <string.h>
 
-// Reference correct solution
+// Reference correct solution TO REPLACE
 List __reference(char *s) {
     if (s == NULL) return NULL;
 
@@ -39,7 +41,7 @@ List __reference(char *s) {
     return result;
 }
 
-// Reference wrong solutions
+// Reference wrong solutions TO REPLACE
 List __wrong1(char *s) {
     return NULL;
 }
@@ -79,7 +81,7 @@ __function_type __wrong[] = {__wrong1, __wrong2, __wrong3};
 #include "list.c"       // List data type implementation
 #include "tester.c"     // Test library implementation BEWARE: must be after data type implementations
 
-// Wraps a call to a student or reference function (adjust to fit the signature)
+// Wraps a call to a student or reference function TO REPLACE to fit the signature
 List stringToList(char *s) {
     __WRAP_START;
     List p = NULL;
@@ -88,7 +90,7 @@ List stringToList(char *s) {
     return p;
 }
 
-// Checks behaviour of the student function on a given input
+// Checks behaviour of the student function on a given input TO REPLACE to fit the signature
 void __test(const char *a) {
     __TEST_START
 
@@ -98,6 +100,7 @@ void __test(const char *a) {
     __string_type xr = __string_build(a);
     __list_type lr = __reference(x);
 
+    // checks two values of a given type for equality possibly printing an error message; the last parameter force to print a debug message when no error occurs
     __ASSERT_SAME_AND_FREE(string, "argument", xr, "modified to",  x, 0);
     __ASSERT_SAME_AND_FREE(list,   "expected", lr, "but obtained", l, __print && __DEBUG);
 
@@ -106,6 +109,8 @@ void __test(const char *a) {
 
 // TEST GROUPS
 
+// __meta_test tests the tests developed in the main function on a given function
+// this test usually doesn't need to be replaced
 void test_main() {
     __print = __DEBUG ? 1 : -1;
     __malloc_cnt_min = 0;
@@ -119,6 +124,7 @@ void test_main() {
     __end_test_suite();
 }
 
+// TO REPLACE this and the following tests
 void samples() {
     __print = 1;
     __malloc_cnt_min = 0;

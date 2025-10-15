@@ -1,12 +1,14 @@
-#define __DATA __INT    // The type in list and tree nodes
+#define __DATA __INT    // The type in list and tree nodes TO REPLACE
 
 #include "tester.h"     // Test library header and setup
 #include "list.h"       // List data type header
 #include "tree.h"       // Tree data type header
+// If needed, further data types may be implemented in a similar way as in those files
 
-List parityPath(Tree t); // Declaration of the function to be implemented
+List parityPath(Tree t); // Declaration of the function to be implemented TO REPLACE
 
 #include "sol_tree.c"
+// TO REPLACE the first pattern
 //{{ STUDENT_ANSWER | replace({
 //    'List parityPath' : 'List student_parityPath', 'goto' : 'goto_disallowed',
 //    'int main' : 'int student_main', 'malloc' : 'student_malloc', 'free' : 'student_free',
@@ -15,12 +17,12 @@ List parityPath(Tree t); // Declaration of the function to be implemented
 //}) }}
 
 #define SEPARATOR       "#<ab@17943918#@>#" // Coderunner separator
-#define __DEBUG         0                   // Use 1 while developing the question, then 0 when ready
-#define __FUNCTION      parityPath          // The name of the function to be developed
-typedef List (*__function_type)(Tree);      // The type of the function to be developed
+#define __DEBUG         0                   // Use 1 while developing the question, then 0 when ready TO REPLACE
+#define __FUNCTION      parityPath          // The name of the function to be developed TO REPLACE
+typedef List (*__function_type)(Tree);      // The type of the function to be developed TO REPLACE
 
 
-// Reference correct solution
+// Reference correct solution TO REPLACE
 List __reference(Tree t) {
     if (t == NULL) return NULL;
     List l = malloc(sizeof(ListNode));
@@ -32,7 +34,7 @@ List __reference(Tree t) {
     return l;
 }
 
-// Reference wrong solutions
+// Reference wrong solutions TO REPLACE
 List __wrong1(Tree t) {
     return NULL;
 }
@@ -57,7 +59,7 @@ __function_type __wrong[] = {__wrong1, __wrong2, __wrong3};
 #include "tree.c"       // Tree data type implementation
 #include "tester.c"     // Test library implementation BEWARE: must be after data type implementations
 
-// Wraps a call to a student or reference function (adjust to fit the signature)
+// Wraps a call to a student or reference function TO REPLACE to fit the signature
 List parityPath(Tree t) {
     __WRAP_START;
     List l = NULL;
@@ -66,7 +68,7 @@ List parityPath(Tree t) {
     return l;
 }
 
-// Checks behaviour of the student function on a given input
+// Checks behaviour of the student function on a given input TO REPLACE to fit the signature
 void __test(const char* s) {
     __TEST_START
 
@@ -76,6 +78,7 @@ void __test(const char* s) {
     Tree tr = __tree_build(s);
     List lr = __reference(t);
 
+    // checks two values of a given type for equality possibly printing an error message; the last parameter force to print a debug message when no error occurs
     __ASSERT_SAME_AND_FREE(tree, "argument", tr, "modified to",  t, 0);
     __ASSERT_SAME_AND_FREE(list, "expected", lr, "but obtained", l, __print && __DEBUG);
 
@@ -84,6 +87,8 @@ void __test(const char* s) {
 
 // TEST GROUPS
 
+// __meta_test tests the tests developed in the main function on a given function
+// this test usually doesn't need to be replaced
 void test_main() {
     __print = __DEBUG ? 1 : -1;
     __malloc_cnt_min = 0;
@@ -97,6 +102,7 @@ void test_main() {
     __end_test_suite();
 }
 
+// TO REPLACE this and the following tests
 void samples() {
     __print = 1;
     __malloc_cnt_min = 0;
