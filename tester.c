@@ -123,7 +123,7 @@ void __check_free() {
 }
 
 // Sets captured signals to a given function
-void __set_signals(sig_t func) {
+void __set_signals(void (*func)(int)) {
     signal(SIGSEGV, func);
     signal(SIGFPE,  func);
 }
