@@ -48,7 +48,6 @@ List __reference(List l, List r) {
 List __wrong1(List l, List r) {
     return NULL;
 }
-// Reference wrong solutions
 List __wrong2(List l, List r) {
     if (l == NULL) return NULL;
     List copy = malloc(sizeof(ListNode));
