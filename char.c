@@ -21,3 +21,9 @@ _Bool __char_diff(__char_const a, __char_const b) {
 void __char_print(__char_const a) {
     printf("%c", a);
 }
+
+// Builds a random int string
+void __char_rand(char *s) {
+    s[0] = 65 + rand()%26 + 32*(rand()%2);
+    s[1] = 0;
+}
