@@ -14,4 +14,10 @@
     #define __data_rand() (rand()%4 ? rand()%30+'a' : rand()%10+'0')
 #endif
 
+#if __DATA == __FLOAT
+    #define __data_f "%f"
+    #define __data_r(x) (x <= '9' ? x - '0' : x <= 'Z' ? x - 'A' + 10 : x - 'a' + 10)*0.025f
+    #define __data_rand() (rand()%4 ? rand()%30+'a' : rand()%10+'0')
+#endif
+
 #endif
