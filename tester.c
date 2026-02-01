@@ -261,10 +261,10 @@ void __meta_test(__function_type f, const char* name, const char* expected) {
     __function = __STUDENT_FUNCTION;
     __check_free();
     if (strcmp(expected, __last_print) != 0) {
-        printf("ERROR: expected ");
-        __string_print(expected);
-        printf(" but obtained ");
+        printf("ERROR: running main to test function \"%s\" prints ", name);
         __string_print(__last_print);
+        printf(" instead of ");
+        __string_print(expected);
         printf("\n");
         __passed = 0;
     }
