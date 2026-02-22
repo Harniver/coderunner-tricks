@@ -35,6 +35,7 @@ const char* __function_name = __TOSTRING(__FUNCTION);   // the name of the funct
 __function_type __function = __STUDENT_FUNCTION;        // a pointer to the student function to be executed
 
 char __last_print[__MAX_PRINT_SIZE];        // buffer capturing printfs of the student
+char __last_debug[__MAX_PRINT_SIZE];        // buffer capturing debug prints of the student
 int __print = 1;                            // the level of detail printed for a test (1: all, 0: all of first fail, -1: input of first fail)
 int __passed = 1;                           // whether tests are passed so far
 
@@ -53,14 +54,24 @@ jmp_buf __env[16];                          // jump information to catch errors
 
 
 // Prints output from the student
-int student_vprintf(const char *restrict format, va_list ap) {
-    int r = vsnprintf(__last_print, sizeof(__last_print), format, ap);
+int student_vfprintf(void *stream, const char *restrict format, va_list ap) {
+    if (stream == stderr) {
+        int r = vsnprintf(__last_debug, __MAX_PRINT_SIZE, format, ap);
+        printf("## ");
+        __string_print(__last_debug);
+        printf("\n");
+        return r;
+    }
+    int r = vsnprintf(__last_print, __MAX_PRINT_SIZE, format, ap);
     if (__print >= 0) {
         printf(">> ");
         __string_print(__last_print);
         printf("\n");
     }
     return r;
+}
+int student_vdprintf(int fd, const char *restrict format, va_list ap) {
+    return student_vfprintf(fd == 2 ? stderr : stdout, format, ap);
 }
 
 
