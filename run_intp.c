@@ -13,7 +13,7 @@ int stoub(char *s, unsigned short b, int *r); // Declaration of the function to 
 //}) }}
 
 #define SEPARATOR       "#<ab@17943918#@>#" // Coderunner separator
-#define __DEBUG         0                   // Use 1 while developing the question, then 0 when ready TO REPLACE
+#define __DEBUG         1                   // Use 1 while developing the question, then 0 when ready TO REPLACE
 #define __FUNCTION      stoub               // The name of the function to be developed TO REPLACE
 typedef int (*__function_type)(char*, unsigned short, int*);    // The type of the function to be developed TO REPLACE
 
@@ -197,7 +197,11 @@ void __test(const char *a, unsigned short b, int *p) {
     }
     __ASSERT_SAME_AND_FREE(int, "expected return code", zr, "but obtained", z, __print && __DEBUG);
 
-    __TEST_END(string, a)
+    char *s = malloc(2);
+    s[1] = 0;
+    s[0] = b < 10 ? '0'+b : 'a'+b-10;
+    __TEST_END(string, a, int, s)
+    free(s);
 }
 
 // TEST GROUPS
@@ -225,7 +229,7 @@ void small_tests() {
     int r;
     __test(NULL, 10, &r);
     __test("0", 1, &r);
-    __test("0", 50, &r);
+    __test("0", 40, &r);
     __test("0", 10, NULL);
     __test("7", 10, &r);
     __test("7", 2, &r);
