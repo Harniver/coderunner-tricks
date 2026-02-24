@@ -9,7 +9,8 @@ int stoub(char *s, unsigned short b, int *r); // Declaration of the function to 
 //    'int stoub' : 'int student_stoub', 'goto' : 'goto_disallowed',
 //    'int main' : 'int student_main', 'malloc' : 'student_malloc', 'free' : 'student_free',
 //    'printf' : 'student_printf', 'fprintf' : 'student_fprintf', 'dprintf' : 'student_dprintf',
-//    'vprintf' : 'student_vprintf', 'vfprintf' : 'student_vfprintf', 'vdprintf' : 'student_vdprintf'
+//    'vprintf' : 'student_vprintf', 'vfprintf' : 'student_vfprintf', 'vdprintf' : 'student_vdprintf',
+//    'puts' : 'student_puts', 'fputs' : 'student_fputs'
 //}) }}
 
 #define SEPARATOR       "#<ab@17943918#@>#" // Coderunner separator

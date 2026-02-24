@@ -41,6 +41,14 @@ int student_dprintf(int fd, const char *restrict format, ...) {
     return r;
 }
 
+int student_puts(const char *s) {
+    return student_dprintf(1, "%s", s);
+}
+
+int student_fputs(const char *s, void *stream) {
+    return student_fprintf(stream, "%s", s);
+}
+
 #endif
 
 #define malloc student_malloc
