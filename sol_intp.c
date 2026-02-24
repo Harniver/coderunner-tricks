@@ -28,7 +28,7 @@
  * @param r l'indirizzo dell'intero dove memorizzare il risultato.
  * @return  il numero di caratteri letti dalla stringa
  *
- * NOTA: questa funzione compare negli errori di compilazione come "student_stoub"
+ * NOTA: questa funzione compare negli errori di compilazione come "student_stoib"
  * NOTA: questa funzione viene testata indipendentemente dal vostro main
  * IMPORTANTE: cercate sempre di far compilare il vostro codice per poter vedere il
  * risultato dei test, anche a costo di commentare parte del codice di questa funzione
@@ -54,12 +54,12 @@
  * @param r the address of the integer where the result is stored.
  * @return  the number of characters read from the string
  *
- * NOTE: this function appears in compilation errors as "student_stoub"
+ * NOTE: this function appears in compilation errors as "student_stoib"
  * NOTE: this function is tested independently of your main
  * IMPORTANT: always try to make your code compile so that you can see the test
  * results, even if that means commenting out part of the code of this function
  */
-int student_stoub(char *s, unsigned short b, int *r) {
+int student_stoib(char *s, unsigned short b, int *r) {
     /* INSERIRE QUI IL CODICE */
     /* INSERT YOUR CODE HERE */
     if (s==NULL || b<2 || b >36 || r==NULL) return 0;
@@ -86,7 +86,7 @@ int student_stoub(char *s, unsigned short b, int *r) {
 
 
 /**
- * Invoca la funzione stoub su uno o più casi a scelta, controllando che
+ * Invoca la funzione stoib su uno o più casi a scelta, controllando che
  * il suo effetto come risultato e argomenti rispetti la specifica corretta.
  * Può essere sufficiente anche un unico caso, se sufficientemente generale per
  * individuare quali programmi sono corretti e quali no.
@@ -94,13 +94,13 @@ int student_stoub(char *s, unsigned short b, int *r) {
  * Se invece la funzione non risulta corretta, deve stampare "TEST FAILED\n".
  *
  * NOTA: questa funzione compare negli errori di compilazione come "student_main"
- * NOTA: il main viene testato indipendentemente dalla vostra funzione stoub
+ * NOTA: il main viene testato indipendentemente dalla vostra funzione stoib
  * IMPORTANTE: cercate sempre di far compilare il vostro codice per poter vedere il
  * risultato dei test, anche a costo di commentare parte del codice di questa funzione
  *
  * <ENGLISH VERSION>
  *
- * Invokes the stoub function on one or more selected test cases, checking
+ * Invokes the stoib function on one or more selected test cases, checking
  * that its effect as result and arguments respects the correct specification.
  * A single test case may be enough, if it sufficiently general to single out
  * which programs are correct and which are not.
@@ -108,7 +108,7 @@ int student_stoub(char *s, unsigned short b, int *r) {
  * If instead the function is not correct, it must print "TEST FAILED\n".
  *
  * NOTE: this function appears in compilation errors as "student_main"
- * NOTE: the main is tested independently of your stoub function
+ * NOTE: the main is tested independently of your stoib function
  * IMPORTANT: always try to make your code compile so that you can see the test
  * results, even if that means commenting out part of the code of this function
  */
@@ -116,14 +116,14 @@ int student_main() {
     /* INSERIRE QUI IL CODICE */
     /* INSERT YOUR CODE HERE */
     int r;
-    _Bool pass = (stoub("  -1C", 16, &r) == 5);
+    _Bool pass = (stoib("  -1C", 16, &r) == 5);
     if (r != -28) pass = 0;
-    if (stoub("0", 50, &r) > 0) pass = 0;
-    if (stoub("+-0", 10, &r) > 0) pass = 0;
+    if (stoib("0", 50, &r) > 0) pass = 0;
+    if (stoib("+-0", 10, &r) > 0) pass = 0;
 
     if (pass)
-        printf("TEST PASSED\n");
-    else printf("TEST FAILED\n");
+        student_printf("TEST PASSED\n");
+    else student_printf("TEST FAILED\n");
 
     return 0;
 }

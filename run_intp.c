@@ -1,12 +1,12 @@
 #include "tester.h"     // Test library header and setup
 // If needed, further data types may be implemented in a similar way as in those files
 
-int stoub(char *s, unsigned short b, int *r); // Declaration of the function to be implemented TO REPLACE
+int stoib(char *s, unsigned short b, int *r); // Declaration of the function to be implemented TO REPLACE
 
 #include "sol_intp.c"
 // TO REPLACE the first pattern
 //{{ STUDENT_ANSWER | replace({
-//    'int stoub' : 'int student_stoub', 'goto' : 'goto_disallowed',
+//    'int stoib' : 'int student_stoib', 'goto' : 'goto_disallowed',
 //    'int main' : 'int student_main', 'malloc' : 'student_malloc', 'free' : 'student_free',
 //    'printf' : 'student_printf', 'fprintf' : 'student_fprintf', 'dprintf' : 'student_dprintf',
 //    'vprintf' : 'student_vprintf', 'vfprintf' : 'student_vfprintf', 'vdprintf' : 'student_vdprintf',
@@ -14,8 +14,8 @@ int stoub(char *s, unsigned short b, int *r); // Declaration of the function to 
 //}) }}
 
 #define SEPARATOR       "#<ab@17943918#@>#" // Coderunner separator
-#define __DEBUG         1                   // Use 1 while developing the question, then 0 when ready TO REPLACE
-#define __FUNCTION      stoub               // The name of the function to be developed TO REPLACE
+#define __DEBUG         0                   // Use 1 while developing the question, then 0 when ready TO REPLACE
+#define __FUNCTION      stoib               // The name of the function to be developed TO REPLACE
 typedef int (*__function_type)(char*, unsigned short, int*);    // The type of the function to be developed TO REPLACE
 
 
@@ -170,7 +170,7 @@ __function_type __wrong[] = {__wrong1, __wrong2, __wrong3, __wrong4, __wrong5, _
 #include "tester.c"     // Test library implementation BEWARE: must be after data type implementations
 
 // Wraps a call to a student or reference function TO REPLACE to fit the signature
-int stoub(char *s, unsigned short b, int *r) {
+int stoib(char *s, unsigned short b, int *r) {
     __WRAP_START;
     int p;
     SAFE_EXEC(p = __function(s, b, r));
@@ -188,7 +188,7 @@ void __test(const char *a, unsigned short b, int *p) {
     if (p) *p = 1073741824;
 
     __string_type x = __string_build(a);
-    int z = stoub(x, b, p);
+    int z = stoib(x, b, p);
     int y = p ? *p : 0;
 
     // checks two values of a given type for equality possibly printing an error message; the last parameter force to print a debug message when no error occurs
