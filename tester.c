@@ -54,7 +54,7 @@ jmp_buf __env[16];                          // jump information to catch errors
 
 
 // Prints output from the student
-int student_vfprintf(void *stream, const char *restrict format, va_list ap) {
+int student_vfprintf(void *stream, const char * format, va_list ap) {
     if (stream == stderr) {
         int r = vsnprintf(__last_debug, __MAX_PRINT_SIZE, format, ap);
         printf("## ");
@@ -70,7 +70,7 @@ int student_vfprintf(void *stream, const char *restrict format, va_list ap) {
     }
     return r;
 }
-int student_vdprintf(int fd, const char *restrict format, va_list ap) {
+int student_vdprintf(int fd, const char * format, va_list ap) {
     return student_vfprintf(fd == 2 ? stderr : stdout, format, ap);
 }
 
@@ -86,9 +86,9 @@ char __secret(size_t i, size_t j) {
 
 // Malloc wrapper: if the size or __malloc_cnt are not small enough returns NULL, else allocate more memory filling it with the secret
 void* student_malloc(size_t size) {
-    if (size > __malloc_size_max || __malloc_cnt == __malloc_cnt_max) return NULL;
+    if (size > (size_t)__malloc_size_max || __malloc_cnt == __malloc_cnt_max) return NULL;
     __malloc_size[__malloc_cnt] = size + 2*__MALLOC_EXTRA;
-    __malloc_addr[__malloc_cnt] = malloc(__malloc_size[__malloc_cnt]);
+    __malloc_addr[__malloc_cnt] = (char*)malloc(__malloc_size[__malloc_cnt]);
     for (int j=0; j<__malloc_size[__malloc_cnt]; ++j)
         __malloc_addr[__malloc_cnt][j] = __secret(__malloc_cnt, j);
     return __malloc_addr[__malloc_cnt++] + __MALLOC_EXTRA;

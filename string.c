@@ -7,7 +7,7 @@ typedef const char* __string_const;
 // Builds a string from a string
 __string_type __string_build(const char* s) {
     if (s == NULL) return NULL;
-    __string_type t = malloc(strlen(s)+1);
+    __string_type t = (__string_type)malloc(strlen(s)+1);
     strcpy(t, s);
     return t;
 }

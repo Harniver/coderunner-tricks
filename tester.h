@@ -9,15 +9,15 @@ void* student_malloc(size_t size);
 
 void student_free(void* ptr);
 
-int student_vfprintf(void *stream, const char *restrict format, va_list ap);
+int student_vfprintf(void *stream, const char * format, va_list ap);
 
-int student_vdprintf(int fd, const char *restrict format, va_list ap);
+int student_vdprintf(int fd, const char * format, va_list ap);
 
-int student_vprintf(const char *restrict format, va_list ap) {
+int student_vprintf(const char * format, va_list ap) {
     return student_vdprintf(1, format, ap);
 }
 
-int student_printf(const char *restrict format, ...) {
+int student_printf(const char * format, ...) {
     va_list ap;
     va_start(ap, format);
     int r = student_vdprintf(1, format, ap);
@@ -25,7 +25,7 @@ int student_printf(const char *restrict format, ...) {
     return r;
 }
 
-int student_fprintf(void *stream, const char *restrict format, ...) {
+int student_fprintf(void *stream, const char * format, ...) {
     va_list ap;
     va_start(ap, format);
     int r = student_vfprintf(stream, format, ap);
@@ -33,7 +33,7 @@ int student_fprintf(void *stream, const char *restrict format, ...) {
     return r;
 }
 
-int student_dprintf(int fd, const char *restrict format, ...) {
+int student_dprintf(int fd, const char * format, ...) {
     va_list ap;
     va_start(ap, format);
     int r = student_vdprintf(fd, format, ap);
