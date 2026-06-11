@@ -40,3 +40,9 @@ void __string_print(__string_const a) {
     if (cnt == __MAX_PRINT_SIZE-2 && a[cnt] != 0) printf("...");
     printf("\"");
 }
+
+// Builds a random string
+void __string_rand(char *s, int max_len) {
+    for (int i=0; i<max_len-1; ++i) s[i] = __data_rand();
+    s[max_len-1] = 0;
+}
