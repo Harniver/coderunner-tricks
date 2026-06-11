@@ -49,6 +49,7 @@ void __array_print(__array_const a) {
 
 // Builds a random array string
 void __array_rand(char *s, int max_len) {
-    __array_len = max_len;
-    for (int i=0; i<max_len; ++i) s[i] = __data_rand();
+    __array_len = max_len-1;
+    for (int i=0; i<max_len-1; ++i) s[i] = __data_rand();
+    s[max_len-1] = 0;
 }
