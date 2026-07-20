@@ -5,7 +5,7 @@
 #if __DATA == __CHAR
     #define __data_f "%c"
     #define __data_r(x) x
-    #define __data_rand() (65 + rand()%26 + 32*(rand()%2))
+    #define __data_rand() (48 + rand()%75)
 #endif
 
 #if __DATA == __INT
