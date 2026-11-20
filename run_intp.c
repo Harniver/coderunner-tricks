@@ -6,8 +6,8 @@ int stoib(char *s, unsigned short b, int *r); // Declaration of the function to 
 #include "sol_intp.c"
 // TO REPLACE the first pattern
 //{{ STUDENT_ANSWER | replace({
-//    'int stoib' : 'int student_stoib', 'goto' : 'goto_disallowed',
-//    'int main' : 'int student_main', 'malloc' : 'student_malloc', 'free' : 'student_free',
+//    'int stoib(' : 'int student_stoib(', 'goto' : 'goto_disallowed',
+//    'int main(' : 'int student_main(', 'malloc' : 'student_malloc', 'free' : 'student_free',
 //    'printf' : 'student_printf', 'fprintf' : 'student_fprintf', 'dprintf' : 'student_dprintf',
 //    'vprintf' : 'student_vprintf', 'vfprintf' : 'student_vfprintf', 'vdprintf' : 'student_vdprintf',
 //    'puts' : 'student_puts', 'fputs' : 'student_fputs'

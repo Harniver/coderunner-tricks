@@ -28,7 +28,7 @@
 #endif
 
 #ifndef __MALLOC_CNT_MAX
-#define __MALLOC_CNT_MAX  1024    // maximum number of malloc allowed in a test
+#define __MALLOC_CNT_MAX  10240   // maximum number of malloc allowed in a test
 #endif
 
 const char* __function_name = __TOSTRING(__FUNCTION);   // the name of the function to be implemented
@@ -86,7 +86,16 @@ char __secret(size_t i, size_t j) {
 
 // Malloc wrapper: if the size or __malloc_cnt are not small enough returns NULL, else allocate more memory filling it with the secret
 void* student_malloc(size_t size) {
-    if (size > (size_t)__malloc_size_max || __malloc_cnt == __malloc_cnt_max) return NULL;
+    if (size > (size_t)__malloc_size_max) {
+        printf("ERROR: malloc of size %zu exceeds maximum of %d\n", size, __malloc_size_max);
+        __passed = 0;
+        return NULL;
+    }
+    if (__malloc_cnt == __malloc_cnt_max) {
+        printf("ERROR: maximum number of allocations (%d) exceeded\n", __malloc_cnt_max);
+        __passed = 0;
+        return NULL;
+    }
     __malloc_size[__malloc_cnt] = size + 2*__MALLOC_EXTRA;
     __malloc_addr[__malloc_cnt] = (char*)malloc(__malloc_size[__malloc_cnt]);
     for (int j=0; j<__malloc_size[__malloc_cnt]; ++j)
